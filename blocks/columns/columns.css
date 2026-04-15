@@ -25,9 +25,79 @@
     flex-direction: unset;
     gap: 24px;
   }
-
+  .two-column-v1 {
+    .columns {
+      & > div {
+        align-items: unset;
+      }
+    }
+  }
   .columns > div > div {
     flex: 1;
     order: unset;
   }
+}
+
+
+/* new styles for feature items */
+/* Main container for the list to add spacing */
+.columns-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-block: 2rem;
+}
+
+/* The sub-parent element aligning icon and text horizontally */
+.columns-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+
+  &:hover {
+    & .columns-feature-icon {
+      background-color: var(--bghovercolor);
+    }
+  }
+}
+
+/* The left element (Icon) styling */
+.columns-feature-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a4b454;
+  border-radius: 5px;
+  transition: .5s;
+
+  & .icon {
+    width: 100%;
+    height: 100%;
+    img {
+      filter: brightness(0) invert(1);
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+  }
+}
+
+/* The right element (Text) styling */
+.columns-feature-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.columns-feature-title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.columns-feature-desc {
+  margin: 0;
+  color: #666;
 }

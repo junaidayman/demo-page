@@ -16,8 +16,21 @@
   --light-color: #f8f8f8;
   --dark-color: #505050;
   --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --link-color: #a2a84c;
+  --link-hover-color: #ffda00;
+
+  --bgcolor:#a2a84c;
+  --bghovercolor:#ffda00;
+	--brrgb: 162,168,76;
+	--bropacity:rgba(0,0,0,0.64);
+  --black:#000000;
+	--white:#ffffff;
+  --bdcolor:#dddddd;
+  --bdhcolor:#a2a84c;
+  --linkcolor:#000000;
+  --titlecolor:#0e0e0e;
+  --pracolor:#4a4a4a;
+  --bshadow:rgba(0,0,0,0.09);
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
@@ -37,7 +50,7 @@
   --heading-font-size-xs: 22px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 80px;
 }
 
 /* fallback fonts */
@@ -199,8 +212,8 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
+  border-color: var(--bgcolor);
+  background-color: var(--bgcolor);
   color: var(--background-color);
 }
 
@@ -208,8 +221,8 @@ a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
+  border-color: var(--bghovercolor);
+  background-color: var(--bghovercolor);
   color: var(--light-color);
 }
 
@@ -297,7 +310,7 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 90px 0 80px;
 }
 
 main > .section > div {

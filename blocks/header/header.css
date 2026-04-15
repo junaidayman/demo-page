@@ -206,7 +206,7 @@ header nav .nav-sections ul > li > ul > li {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 0.5em;
+    top: 0.2em;
     right: 2px;
     transform: rotate(135deg);
     width: 6px;
@@ -226,12 +226,38 @@ header nav .nav-sections ul > li > ul > li {
     display: flex;
     gap: 24px;
     margin: 0;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: relative;
+  flex: 0 1 auto;
+  position: relative;
+  & a, p {
+    color: var(--text-color);
+    transition: .5s;
+    &:hover {
+      color: var(--link-hover-color);
+      text-decoration: none;
+    }
   }
+
+  &:last-child a {
+    background-color: var(--bgcolor);
+    transition: .5s;
+    color: var(--light-color);
+    border-radius: 5px;
+    padding: 7px 25px;
+    @media (width >= 900px) {
+      font-size: 18px;
+      padding: 6px 15px;
+    }
+    &:hover {
+      background-color: var(--bghovercolor);
+      text-decoration: none;
+    }
+  }
+}
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;

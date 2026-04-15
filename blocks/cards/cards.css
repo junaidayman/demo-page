@@ -25,3 +25,35 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+.cards.with-icons > ul > li {
+  border: unset;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px 0px var(--bshadow);
+  position: relative;
+  z-index: 1;
+  transition: .5s;
+  &:hover {
+    background-color: var(--bghovercolor);
+  }
+
+  & .cards-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    & h3 {
+      font-size: var(--heading-font-size-xs);
+    }
+  }
+
+  & .icon {
+    width: 100%;
+    height: 100%;
+    & img {
+      width: 60px;
+      height: 70px;
+      object-fit: contain;
+    }
+  }
+}
