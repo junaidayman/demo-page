@@ -1,3 +1,9 @@
+main > .section.our-features-section {
+  @media (width >= 900px) {
+    margin-top: -155px;
+  }
+}
+
 footer {
   background-color: var(--bgcolor);
   color: #333;

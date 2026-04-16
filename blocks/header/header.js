@@ -2,6 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 const isDesktop = window.matchMedia('(min-width: 900px)');
+let lastScrollY = window.scrollY;
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -93,7 +94,6 @@ export default async function decorate(block) {
     : '/nav';
 
   const fragment = await loadFragment(navPath);
-
   block.textContent = '';
 
   const nav = document.createElement('nav');
@@ -104,44 +104,63 @@ export default async function decorate(block) {
     if (nav.children[i]) nav.children[i].classList.add(`nav-${c}`);
   });
 
-  /* =====================================================
-   ✅ EXTRACT HEADER TOP TEXT
-   ===================================================== */
+  /* ==========================================
+   ✅ Extract header-top text from nav content
+   ========================================== */
 
-  let headerTopContent;
+  let headerTopParagraph;
   const navSections = nav.querySelector('.nav-sections');
-  const contentWrapper = navSections?.querySelector('.default-content-wrapper');
+  const wrapper = navSections?.querySelector('.default-content-wrapper');
+  const paragraphs = wrapper?.querySelectorAll(':scope > p');
 
-  if (contentWrapper) {
-    const paragraphs = contentWrapper.querySelectorAll(':scope > p');
-    if (paragraphs.length) {
-      headerTopContent = paragraphs[paragraphs.length - 1];
-      headerTopContent.remove();
-    }
+  if (paragraphs && paragraphs.length) {
+    headerTopParagraph = paragraphs[paragraphs.length - 1];
+    headerTopParagraph.remove();
   }
-
-  /* =====================================================
-   ✅ BUILD HEADER TOP BANNER
-   ===================================================== */
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
 
-  if (headerTopContent) {
+  if (headerTopParagraph) {
     const banner = document.createElement('div');
     banner.className = 'header-top-banner';
 
     const inner = document.createElement('div');
     inner.className = 'header-top-banner-wrapper';
 
-    inner.append(headerTopContent);
+    inner.append(headerTopParagraph);
     banner.append(inner);
     navWrapper.append(banner);
+
+    /* ==========================================
+     ✅ Scroll behavior: hide banner + sticky header
+     ========================================== */
+
+    const headerWrapper = block.closest('.header-wrapper');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > 50) {
+        headerWrapper.classList.add('is-sticky');
+
+        if (currentScroll > lastScrollY) {
+          banner.classList.add('is-hidden'); // scrolling down
+        } else {
+          banner.classList.remove('is-hidden'); // scrolling up
+        }
+      } else {
+        headerWrapper.classList.remove('is-sticky');
+        banner.classList.remove('is-hidden');
+      }
+
+      lastScrollY = currentScroll;
+    });
   }
 
-  /* =====================================================
-   ✅ NAV SECTION LOGIC (UNCHANGED)
-   ===================================================== */
+  /* ==========================================
+   ✅ Nav behavior (unchanged)
+   ========================================== */
 
   navSections?.querySelectorAll('.default-content-wrapper > ul > li')
     .forEach((li) => {

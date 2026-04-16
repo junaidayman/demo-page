@@ -327,3 +327,24 @@ header nav .nav-tools {
     }
   }
 }
+
+.header-wrapper {
+  position: relative;
+}
+
+.header-wrapper.is-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-top-banner {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.header-top-banner.is-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}

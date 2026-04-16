@@ -25,12 +25,8 @@
     flex-direction: unset;
     gap: 24px;
   }
-  .two-column-v1 {
-    .columns {
-      & > div {
-        align-items: unset;
-      }
-    }
+  .our-business .columns div {
+    align-items: unset;
   }
   .columns > div > div {
     flex: 1;
@@ -53,7 +49,6 @@
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
-
 
   &:hover {
     & .columns-feature-icon {
@@ -116,4 +111,15 @@
 .columns-feature-desc {
   margin: 0;
   color: #666;
+}
+
+/* our achievements section */
+.our-achievements {
+  background-color: #A2A84C;
+  color: var(--light-color);
+
+  & .columns {
+    padding-block-start: 50px;
+    padding-block-end: 50px;
+  }
 }
