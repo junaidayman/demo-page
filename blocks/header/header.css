@@ -296,3 +296,34 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+/* header top banner styles */
+.header-top-banner {
+  background-color: var(--bgcolor);
+  color: var(--light-color);
+  font-size: var(--body-font-size-s);
+  padding: 10px 0;
+
+  & .header-top-banner-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1200px;
+    padding: 0 24px;
+    @media (width >= 900px) {
+      padding: 0 32px;
+    }
+
+    p {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      & .icon {
+        a {
+          color: var(--light-color);
+        }
+      }
+    }
+  }
+}
