@@ -320,10 +320,15 @@ header nav .nav-tools {
       display: flex;
       align-items: center;
       & .icon {
-        a {
-          color: var(--light-color);
+        filter: brightness(0) invert(1);
+        padding-inline-end: 4px;
+        &:last-child {
+          padding-inline-start: 4px;
         }
       }
+      & a {
+          color: var(--light-color);
+        }
     }
   }
 }
