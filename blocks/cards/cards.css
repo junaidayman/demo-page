@@ -57,3 +57,9 @@
     }
   }
 }
+
+main > .section.our-features-section {
+  @media (width >= 900px) {
+    margin-top: -75px;
+  }
+}

@@ -1,9 +1,3 @@
-main > .section.our-features-section {
-  @media (width >= 900px) {
-    margin-top: -155px;
-  }
-}
-
 footer {
   background-color: var(--bgcolor);
   color: #333;
@@ -67,10 +61,14 @@ footer .footer p {
   }
 
   & .columns-wrapper {
+    & .columns {
+      & div {
+        align-items: unset;
+      }
+    }
     ul {
       padding: 0;
       margin: 0;
-
       li {
           list-style: none;
           margin-bottom: 8px;
@@ -86,8 +84,20 @@ footer .footer p {
           }
         }
     }
+    h3 {
+        margin: 0 0 20px;
+        padding: 0;
+        &::after {
+          content: '';
+          display: block;
+          width: calc(100% - 75%);
+          height: 1px;
+          background-color: var(--bgcolor);
+          margin-top: 4px;
+        }
+      }
     & .footer-brand {
-      img {
+      & img {
         filter: brightness(0) invert(1);
         width: 120px;
         height: auto;
@@ -99,9 +109,10 @@ footer .footer p {
       & .columns-feature-list {
         margin-block: unset;
         & .columns-feature-icon {
+          flex-shrink: unset;
           li {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 8px;
             flex-wrap: nowrap;
           }
