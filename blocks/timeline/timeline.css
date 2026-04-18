@@ -134,7 +134,7 @@ body {
     }
 }
 
-main img {
+.timeline img {
     max-width: 100%;
     width: auto;
     height: auto;
