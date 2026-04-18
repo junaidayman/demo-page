@@ -39,7 +39,7 @@ export default async function decorate(block) {
   /* 4. Pagination & navigation */
   swiperEl.append(
     swiperWrapper,
-    createDiv('swiper-pagination'),
+    // createDiv('swiper-pagination'),
     createDiv('swiper-button-prev'),
     createDiv('swiper-button-next'),
   );
@@ -56,10 +56,10 @@ export default async function decorate(block) {
       delay: 5000,
       disableOnInteraction: false,
     },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: false,
-    },
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: false,
+    // },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',

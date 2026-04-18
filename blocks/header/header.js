@@ -104,37 +104,43 @@ export default async function decorate(block) {
     if (nav.children[i]) nav.children[i].classList.add(`nav-${c}`);
   });
 
-  /* ==========================================
-   ✅ Extract header-top text from nav content
-   ========================================== */
+  /* =================================================
+     ✅ EXTRACT ALL HEADER-TOP LINES (MULTI-LINE SAFE)
+     ================================================= */
 
-  let headerTopParagraph;
   const navSections = nav.querySelector('.nav-sections');
-  const wrapper = navSections?.querySelector('.default-content-wrapper');
-  const paragraphs = wrapper?.querySelectorAll(':scope > p');
+  const contentWrapper = navSections?.querySelector('.default-content-wrapper');
 
-  if (paragraphs && paragraphs.length) {
-    headerTopParagraph = paragraphs[paragraphs.length - 1];
-    headerTopParagraph.remove();
+  let headerTopParagraphs = [];
+  if (contentWrapper) {
+    headerTopParagraphs = [...contentWrapper.querySelectorAll(':scope > p')];
+    headerTopParagraphs.forEach((p) => p.remove());
   }
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
 
-  if (headerTopParagraph) {
+  if (headerTopParagraphs.length) {
     const banner = document.createElement('div');
     banner.className = 'header-top-banner';
 
-    const inner = document.createElement('div');
-    inner.className = 'header-top-banner-wrapper';
+    const bannerWrapper = document.createElement('div');
+    bannerWrapper.className = 'header-top-banner-wrapper';
 
-    inner.append(headerTopParagraph);
-    banner.append(inner);
+    // ✅ ONE default-content-wrapper PER LINE
+    headerTopParagraphs.forEach((p) => {
+      const dcw = document.createElement('div');
+      dcw.className = 'default-content-wrapper';
+      dcw.append(p);
+      bannerWrapper.append(dcw);
+    });
+
+    banner.append(bannerWrapper);
     navWrapper.append(banner);
 
     /* ==========================================
-     ✅ Scroll behavior: hide banner + sticky header
-     ========================================== */
+       ✅ Sticky + scroll hide logic
+       ========================================== */
 
     const headerWrapper = block.closest('.header-wrapper');
 
@@ -145,9 +151,9 @@ export default async function decorate(block) {
         headerWrapper.classList.add('is-sticky');
 
         if (currentScroll > lastScrollY) {
-          banner.classList.add('is-hidden'); // scrolling down
+          banner.classList.add('is-hidden');
         } else {
-          banner.classList.remove('is-hidden'); // scrolling up
+          banner.classList.remove('is-hidden');
         }
       } else {
         headerWrapper.classList.remove('is-sticky');
@@ -158,9 +164,9 @@ export default async function decorate(block) {
     });
   }
 
-  /* ==========================================
-   ✅ Nav behavior (unchanged)
-   ========================================== */
+  /* =================================================
+     ✅ NAV BEHAVIOR (UNCHANGED)
+     ================================================= */
 
   navSections?.querySelectorAll('.default-content-wrapper > ul > li')
     .forEach((li) => {

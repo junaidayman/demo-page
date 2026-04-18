@@ -26,6 +26,9 @@ export default async function decorate(block) {
 
   // ✅ Add semantic footer column classes
   decorateFooterColumns(block);
+
+  // ✅ Refactor footer gallery DOM
+  decorateFooterGallery(block);
 }
 
 /**
@@ -37,7 +40,6 @@ function decorateFooterColumns(block) {
 
   columnsBlock.classList.add('footer-columns');
 
-  // Each column
   const cols = columnsBlock.querySelectorAll(':scope > div > div');
 
   cols.forEach((col) => {
@@ -45,7 +47,7 @@ function decorateFooterColumns(block) {
 
     const heading = col.querySelector('h2, h3, h4');
 
-    // ✅ Column without heading = brand column
+    // Column without heading = brand column
     if (!heading) {
       col.classList.add('footer-brand');
       return;
@@ -60,8 +62,37 @@ function decorateFooterColumns(block) {
     } else if (headingText.includes('gallery')) {
       col.classList.add('footer-gallery');
     } else {
-      // Fallback (safe default)
       col.classList.add('footer-brand');
     }
   });
+}
+
+/**
+ * ✅ Refactor footer gallery column
+ * Wraps image <p> elements into .footer-gallery-list
+ */
+function decorateFooterGallery(block) {
+  const galleryCol = block.querySelector('.footer-col.footer-gallery');
+  if (!galleryCol) return;
+
+  // Find all <p> elements that contain a picture
+  const imageParas = [...galleryCol.querySelectorAll('p')]
+    .filter((p) => p.querySelector('picture'));
+
+  if (!imageParas.length) return;
+
+  const galleryList = document.createElement('div');
+  galleryList.className = 'footer-gallery-list';
+
+  imageParas.forEach((p) => {
+    galleryList.appendChild(p);
+  });
+
+  // Insert after heading
+  const heading = galleryCol.querySelector('h2, h3, h4');
+  if (heading) {
+    heading.after(galleryList);
+  } else {
+    galleryCol.appendChild(galleryList);
+  }
 }
