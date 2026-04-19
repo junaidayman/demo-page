@@ -90,6 +90,11 @@ main > .section.our-features-section {
       &::before {
         height: 100%;
       }
+      & .cards-card-body {
+        & p, h2 {
+          color: var(--white);
+        }
+      }
     }
 
     & .cards-card-body {
