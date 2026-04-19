@@ -126,3 +126,12 @@
     padding-block-end: 50px;
   }
 }
+
+/* investment section */
+.investment {
+  & .columns-feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
