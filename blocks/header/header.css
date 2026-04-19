@@ -341,6 +341,13 @@ header nav .nav-tools {
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: .5s;
+
+  @media (width >= 900px) {
+    & .nav-wrapper {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
 }
 
 .header-top-banner {
