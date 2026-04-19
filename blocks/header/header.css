@@ -347,6 +347,11 @@ header nav .nav-tools {
     & .nav-wrapper {
       background-color: rgba(0, 0, 0, 0.7);
     }
+    & .nav-sections {
+      & .default-content-wrapper > ul > li > p, & .default-content-wrapper > ul > li > a {
+        color: var(--white);
+      }
+    }
   }
 }
 

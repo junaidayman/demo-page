@@ -35,6 +35,13 @@
   transition: .5s;
   &:hover {
     background-color: var(--bghovercolor);
+    color: var(--white);
+
+    & .icon {
+      & img {
+        filter: brightness(0) invert(1);
+      }
+    }
   }
 
   & .cards-card-body {
@@ -101,7 +108,9 @@ main > .section.our-features-section {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 10px;
       text-align: center;
+      margin: 0;
 
       & p, h2 {
         margin: 0;
