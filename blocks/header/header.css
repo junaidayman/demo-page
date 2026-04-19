@@ -335,16 +335,9 @@ header nav .nav-tools {
 
 .header-wrapper {
   position: relative;
-  
-  &:not(:has(.is-sticky)) {
-    & .nav-brand {
-      & .default-content-wrapper {
-        & p:last-child {
-          display: none;
-        }
-      }
-    }
-  }
+}
+.header-wrapper:not(.is-sticky) .nav-brand .default-content-wrapper p:last-child {
+  display: none;
 }
 
 .header-wrapper.is-sticky {
