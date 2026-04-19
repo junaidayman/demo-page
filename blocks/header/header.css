@@ -348,8 +348,11 @@ header nav .nav-tools {
       background-color: rgba(0, 0, 0, 0.7);
     }
     & .nav-sections {
-      & .default-content-wrapper > ul > li > p, & .default-content-wrapper > ul > li > a {
+      & .default-content-wrapper > ul > li > p, & .default-content-wrapper > ul > li > p > a {
         color: var(--white);
+      }
+      & .nav-drop::after {
+        border-color: var(--white) transparent transparent transparent;
       }
     }
   }
