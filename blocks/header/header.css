@@ -352,7 +352,14 @@ header nav .nav-tools {
         color: var(--white);
       }
       & .nav-drop::after {
-        border-color: var(--white) transparent transparent transparent;
+        border-color: var(--white);
+      }
+    }
+    & .nav-brand {
+      & .default-content-wrapper {
+        & p:first-child {
+          display: none;
+        }
       }
     }
   }
