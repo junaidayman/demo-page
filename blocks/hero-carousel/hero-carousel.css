@@ -5,7 +5,7 @@
       max-width: 100%;
       padding: 0;
       .swiper-button-next:after, .swiper-button-prev:after{
-        font-size: 14px;
+        font-size: 20px;
         color: #fff;
       }
       .hero-text-wrapper{
@@ -29,12 +29,12 @@
           }
           a {
             padding: 15px 40px 15px 40px;
-            background: #0659d4;
+            background: var(--bgcolor);
             border-radius: 5px;
             text-decoration: none;
             color: #fff;
             &:hover{
-              background: #0541a0;
+              background-color: var(--bghovercolor);
             }
           }
       }
