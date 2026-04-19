@@ -133,5 +133,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+
+    & .columns-feature-item {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 }
