@@ -13,14 +13,6 @@
   margin-bottom: 100px;
 }
 
-.whaet-slide > div > div:first-child {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  transform: scale(1);
-  transition: transform 0.5s ease;
-}
-
 .whaet-slide picture,
 .whaet-slide img {
   width: 100%;
@@ -29,7 +21,7 @@
   display: block;
 }
 
-.whaet-slide > div > div::before {
+.whaet-slide > div > div:first-child:before {
   content: '';
   position: absolute;
   inset: 0;
@@ -45,7 +37,7 @@
   z-index: 1;
 }
 
-.whaet-slide:hover > div > div::before {
+.whaet-slide:hover > div > div:first-child:before {
     -webkit-transform: scale(1);
         transform: scale(1);
 }
