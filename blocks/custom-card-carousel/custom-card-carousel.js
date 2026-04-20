@@ -13,7 +13,10 @@ export default async function decorate(block) {
   const wrapper = document.createElement('div');
   wrapper.className = 'swiper-wrapper';
 
-  [...block.children].forEach((card) => {
+  const cards = [...block.children];
+  const totalSlides = cards.length;
+
+  cards.forEach((card) => {
     const slide = document.createElement('div');
     slide.className = 'swiper-slide whaet-slide';
     slide.append(card);
@@ -29,11 +32,24 @@ export default async function decorate(block) {
   block.innerHTML = '';
   block.append(swiper);
 
-  const instance = new window.Swiper(swiper, {
+  /**
+   * ✅ KEY FIXES
+   * - slidesPerGroup: 1 → move ONE card per slide
+   * - loopedSlides → base duplication
+   * - loopAdditionalSlides → EXTRA buffer to avoid gaps
+   */
+  new window.Swiper(swiper, {
     loop: true,
     centeredSlides: true,
+
     slidesPerView: 4,
+    slidesPerGroup: 1,
     spaceBetween: 30,
+
+    loopedSlides: totalSlides,
+    loopAdditionalSlides: totalSlides * 2,
+
+    watchSlidesProgress: true,
     grabCursor: true,
     speed: 800,
 
@@ -43,6 +59,7 @@ export default async function decorate(block) {
       pauseOnMouseEnter: true,
     },
 
+    effect: 'coverflow',
     coverflowEffect: {
       rotate: 0,
       stretch: -40,
@@ -51,18 +68,26 @@ export default async function decorate(block) {
       slideShadows: false,
     },
 
-    effect: 'coverflow',
-
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
 
     breakpoints: {
-      0: { slidesPerView: 1 },
-      600: { slidesPerView: 2 },
-      900: { slidesPerView: 3 },
-      1200: { slidesPerView: 4 },
+      0: {
+        slidesPerView: 1,
+        centeredSlides: false,
+      },
+      600: {
+        slidesPerView: 2,
+        centeredSlides: false,
+      },
+      900: {
+        slidesPerView: 3,
+      },
+      1200: {
+        slidesPerView: 4,
+      },
     },
   });
 }

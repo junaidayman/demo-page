@@ -103,9 +103,9 @@
 }
 
 .custom-card-carousel-container .swiper-button-prev {
-  left: -25px;
+  left: 0;
 }
 
 .custom-card-carousel-container .swiper-button-next {
-  right: -25px;
+  right: 0;
 }
