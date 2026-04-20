@@ -1,35 +1,31 @@
 import { loadCSS, loadScript } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  // ✅ Activate only for custom-card-carousel
-  const section = block.closest('.custom-card-carousel');
-  if (!section) return;
-
-  const list = block.querySelector('ul');
-  if (!list) return;
+  const wrapper = block.closest('.custom-card-carousel-wrapper');
+  if (!wrapper) return;
 
   /* Load Swiper */
   await loadCSS('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css');
   await loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
 
-  /* Build Swiper DOM */
+  /* Create Swiper structure */
   const swiper = document.createElement('div');
-  swiper.className = 'swiper cards-swiper';
+  swiper.className = 'swiper custom-card-swiper';
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'swiper-wrapper';
+  const swiperWrapper = document.createElement('div');
+  swiperWrapper.className = 'swiper-wrapper';
 
-  [...list.children].forEach((li) => {
+  [...block.children].forEach((item) => {
     const slide = document.createElement('div');
-    slide.className = 'swiper-slide cards-slide';
-    slide.append(li);
-    wrapper.append(slide);
+    slide.className = 'swiper-slide custom-card-slide';
+    slide.append(item);
+    swiperWrapper.append(slide);
   });
 
   swiper.append(
-    wrapper,
-    createDiv('swiper-button-prev'),
-    createDiv('swiper-button-next'),
+    swiperWrapper,
+    arrow('swiper-button-prev'),
+    arrow('swiper-button-next'),
   );
 
   block.innerHTML = '';
@@ -45,7 +41,6 @@ export default async function decorate(block) {
     autoplay: {
       delay: 4000,
       disableOnInteraction: false,
-      pauseOnMouseEnter: true,
     },
 
     navigation: {
@@ -62,8 +57,8 @@ export default async function decorate(block) {
   });
 }
 
-function createDiv(className) {
-  const div = document.createElement('div');
-  div.className = className;
-  return div;
+function arrow(className) {
+  const btn = document.createElement('div');
+  btn.className = className;
+  return btn;
 }
