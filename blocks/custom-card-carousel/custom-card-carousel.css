@@ -21,11 +21,6 @@
   transition: transform 0.5s ease;
 }
 
-.whaet-slide:hover > div > div:first-child,
-.whaet-slide-active > div > div:first-child {
-  transform: scale(1.1);
-}
-
 .whaet-slide picture,
 .whaet-slide img {
   width: 100%;
@@ -34,17 +29,24 @@
   display: block;
 }
 
-.whaet-slide > div::before {
+.whaet-slide > div > div::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
   transition: background-color 0.4s ease;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: scale(0);
+    transform: scale(0);
   z-index: 2;
 }
 
-.whaet-slide:hover > div::before {
-  background-color: rgba(0, 0, 0, 0.5);
+.whaet-slide:hover > div > div::before {
+    -webkit-transform: scale(1.2);
+        transform: scale(1.2);
 }
 
 .whaet-slide > div > div:last-child {
@@ -62,7 +64,6 @@
 }
 
 .whaet-slide:hover > div > div:last-child {
-  bottom: 14px;
   background-color: var(--bghovercolor, #f5cf00);
 }
 
