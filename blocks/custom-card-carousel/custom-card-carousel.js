@@ -1,47 +1,57 @@
 import { loadCSS, loadScript } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  const wrapper = block.closest('.custom-card-carousel-wrapper');
-  if (!wrapper) return;
+  const container = block.closest('.custom-card-carousel-container');
+  if (!container) return;
 
-  /* Load Swiper */
   await loadCSS('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css');
   await loadScript('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js');
 
-  /* Create Swiper structure */
   const swiper = document.createElement('div');
-  swiper.className = 'swiper custom-card-swiper';
+  swiper.className = 'swiper whaet-card-swiper';
 
-  const swiperWrapper = document.createElement('div');
-  swiperWrapper.className = 'swiper-wrapper';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'swiper-wrapper';
 
-  [...block.children].forEach((item) => {
+  [...block.children].forEach((card) => {
     const slide = document.createElement('div');
-    slide.className = 'swiper-slide custom-card-slide';
-    slide.append(item);
-    swiperWrapper.append(slide);
+    slide.className = 'swiper-slide whaet-slide';
+    slide.append(card);
+    wrapper.append(slide);
   });
 
   swiper.append(
-    swiperWrapper,
-    arrow('swiper-button-prev'),
-    arrow('swiper-button-next'),
+    wrapper,
+    navArrow('swiper-button-prev'),
+    navArrow('swiper-button-next')
   );
 
   block.innerHTML = '';
   block.append(swiper);
 
-  /* Init Swiper */
-  new window.Swiper(swiper, {
+  const instance = new window.Swiper(swiper, {
+    loop: true,
+    centeredSlides: true,
     slidesPerView: 4,
     spaceBetween: 30,
-    loop: true,
     grabCursor: true,
+    speed: 800,
 
     autoplay: {
-      delay: 4000,
+      delay: 3800,
       disableOnInteraction: false,
+      pauseOnMouseEnter: true,
     },
+
+    coverflowEffect: {
+      rotate: 0,
+      stretch: -40,
+      depth: 120,
+      modifier: 1,
+      slideShadows: false,
+    },
+
+    effect: 'coverflow',
 
     navigation: {
       nextEl: '.swiper-button-next',
@@ -57,8 +67,8 @@ export default async function decorate(block) {
   });
 }
 
-function arrow(className) {
-  const btn = document.createElement('div');
-  btn.className = className;
-  return btn;
+function navArrow(cls) {
+  const el = document.createElement('div');
+  el.className = cls;
+  return el;
 }
