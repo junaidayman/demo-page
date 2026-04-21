@@ -1,0 +1,33 @@
+.custom-form-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+}
+
+.custom-form-info > p {
+  margin-bottom: 12px;
+}
+
+.eds-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.eds-form textarea {
+  grid-column: span 2;
+}
+
+.eds-form-submit {
+  grid-column: span 2;
+}
+
+.eds-form button {
+  background: var(--bgcolor, #9fa83b);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
