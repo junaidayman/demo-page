@@ -1,14 +1,15 @@
+/* ===============================
+    Mobile First Styles
+    =============================== */
+
 .custom-form-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
   gap: 40px;
   align-items: flex-start;
 }
 
-/* ===============================
-   Form Left Column
-   =============================== */
-
+/* Form Left Column */
 .custom-form-info-list {
   box-shadow: 0px 0px 20px 0px var(--bshadow);
   padding: 30px 25px;
@@ -35,10 +36,7 @@
   height: 16px;
 }
 
-/* ===============================
-   Form Right Column
-   =============================== */
-
+/* Form Right Column */
 .custom-form-form {
   position: relative;
   background-size: cover;
@@ -51,16 +49,20 @@
 
 .eds-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
+.eds-form-field {
+  width: 100%;
+}
+
 .eds-form textarea {
-  grid-column: span 2;
+  grid-column: span 1;
 }
 
 .eds-form-submit {
-  grid-column: span 2;
+  grid-column: span 1;
   margin-top: 10px;
 }
 
@@ -71,6 +73,7 @@
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .eds-form button {
@@ -81,14 +84,29 @@
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
+  width: 100%;
 }
 
 .eds-form button:hover {
   background: var(--bghovercolor, #7f8730);
 }
 
-@media (max-width: 900px) {
+/* ===============================
+    Desktop Styles
+    =============================== */
+@media (min-width: 901px) {
   .custom-form-layout {
-    grid-template-columns: 1fr;
+     grid-template-columns: 1fr 2fr;
+  }
+
+  .eds-form {
+     grid-template-columns: repeat(2, 1fr);
+     gap: 20px;
+  }
+
+  /* Make last form field (e.g., textarea or submit) full width */
+  .eds-form textarea,
+  .eds-form-submit {
+     grid-column: span 2;
   }
 }
