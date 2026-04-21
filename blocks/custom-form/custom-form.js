@@ -55,69 +55,73 @@ if (buffer.length) {
 }
 
   /* ===============================
-     form right column group
-     =============================== */
+   Form Right Column Logic
+   =============================== */
 
-  const link = formCol.querySelector('a[href$=".json"]');
-  if (!link) return;
+const link = formCol.querySelector('a[href$=".json"]');
+if (!link) return;
 
-  const formUrl = link.href;
-  formCol.innerHTML = '';
+const formUrl = link.href;
 
-  let response;
-  try {
-    response = await fetch(formUrl);
-  } catch (e) {
+// Remove only the link's parent paragraph
+const linkWrapper = link.closest('p');
+if (linkWrapper) linkWrapper.remove();
+
+let response;
+try {
+  response = await fetch(formUrl);
+} catch (e) {
+  return;
+}
+
+if (!response.ok) return;
+
+const formJson = await response.json();
+if (!formJson?.data) return;
+
+const form = document.createElement('form');
+form.className = 'eds-form';
+form.method = 'post';
+form.noValidate = true;
+
+formJson.data.forEach((field) => {
+  if (field.Type === 'submit') {
+    const btnWrap = document.createElement('div');
+    btnWrap.className = 'eds-form-submit';
+
+    const button = document.createElement('button');
+    button.type = 'submit';
+    button.textContent = field.Label || 'Send A Message';
+
+    btnWrap.appendChild(button);
+    form.appendChild(btnWrap);
     return;
   }
 
-  if (!response.ok) return;
+  const fieldWrap = document.createElement('div');
+  fieldWrap.className = 'eds-form-field';
 
-  const formJson = await response.json();
-  if (!formJson?.data) return;
+  let input;
+  if (field.Type === 'textarea') {
+    input = document.createElement('textarea');
+    input.rows = 5;
+  } else {
+    input = document.createElement('input');
+    input.type = field.Type || 'text';
+  }
 
-  const form = document.createElement('form');
-  form.className = 'eds-form';
-  form.method = 'post';
-  form.noValidate = true;
+  input.name = field.Name;
+  input.placeholder = field.Placeholder || field.Label || '';
+  input.setAttribute('aria-label', field.Label || field.Name);
 
-  formJson.data.forEach((field) => {
-    if (field.Type === 'submit') {
-      const btnWrap = document.createElement('div');
-      btnWrap.className = 'eds-form-submit';
+  if (field.Required === 'yes') {
+    input.required = true;
+  }
 
-      const button = document.createElement('button');
-      button.type = 'submit';
-      button.textContent = field.Label || 'Send Message';
+  fieldWrap.appendChild(input);
+  form.appendChild(fieldWrap);
+});
 
-      btnWrap.appendChild(button);
-      form.appendChild(btnWrap);
-      return;
-    }
-
-    const fieldWrap = document.createElement('div');
-    fieldWrap.className = 'eds-form-field';
-
-    let input;
-    if (field.Type === 'textarea') {
-      input = document.createElement('textarea');
-      input.rows = 5;
-    } else {
-      input = document.createElement('input');
-      input.type = field.Type || 'text';
-    }
-
-    input.name = field.Name;
-    input.placeholder = field.Placeholder || field.Label || '';
-    input.setAttribute('aria-label', field.Label || field.Name);
-
-    if (field.Required === 'yes') {
-      input.required = true;
-    }
-
-    fieldWrap.appendChild(input);
-    form.appendChild(fieldWrap);
-  });
-
-  formCol.appendChild(form);
+// Append form AFTER authored heading/content
+formCol.appendChild(form);
 }
