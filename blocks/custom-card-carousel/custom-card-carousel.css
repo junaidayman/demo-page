@@ -9,7 +9,7 @@
 .whaet-slide > div {
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: inherit;
+  overflow: hidden;
   margin-bottom: 100px;
 }
 
@@ -21,25 +21,31 @@
   display: block;
 }
 
-.whaet-slide > div > div:first-child:before {
+.whaet-slide > div::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: background-color 0.4s ease;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  -webkit-transform: scale(0);
-    transform: scale(0);
-    transition: .5s;
-  z-index: 1;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: opacity 0.4s ease, background-color 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.whaet-slide:hover > div > div:first-child:before {
-    -webkit-transform: scale(1);
-        transform: scale(1);
+.whaet-slide:hover > div::before {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+.whaet-slide > div > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+
+.whaet-slide:hover > div > div:first-child {
+  transform: scale(1.1);
 }
 
 .whaet-slide > div > div:last-child {
@@ -53,10 +59,11 @@
   text-align: center;
   z-index: 3;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
-  transition: .5s;
+  transition: bottom 0.4s ease, background-color 0.4s ease;
 }
 
 .whaet-slide:hover > div > div:last-child {
+  bottom: 14px;
   background-color: var(--bghovercolor, #f5cf00);
 }
 
@@ -97,7 +104,7 @@
 .custom-card-carousel-container .swiper-button-next::after {
   font-size: 18px;
   font-weight: bold;
-  color: #000;
+  color: var(--white, #fff);
 }
 
 .custom-card-carousel-container .swiper-button-prev {

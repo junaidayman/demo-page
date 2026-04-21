@@ -51,6 +51,7 @@ export default async function decorate(block) {
 
     watchSlidesProgress: true,
     grabCursor: true,
+    freeMode: true,
     speed: 800,
 
     autoplay: {
@@ -59,14 +60,14 @@ export default async function decorate(block) {
       pauseOnMouseEnter: true,
     },
 
-    effect: 'coverflow',
-    coverflowEffect: {
-      rotate: 0,
-      stretch: -40,
-      depth: 120,
-      modifier: 1,
-      slideShadows: false,
-    },
+    // effect: 'coverflow',
+    // coverflowEffect: {
+    //   rotate: 0,
+    //   stretch: -40,
+    //   depth: 120,
+    //   modifier: 1,
+    //   slideShadows: false,
+    // },
 
     navigation: {
       nextEl: '.swiper-button-next',
