@@ -1,7 +1,3 @@
-/* ===============================
-    Mobile First Styles
-    =============================== */
-
 .custom-form-layout {
   display: grid;
   grid-template-columns: 1fr;
@@ -11,34 +7,40 @@
 
 /* Form Left Column */
 .custom-form-info-list {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  column-gap: 20px;
+  align-items: flex-start;
   box-shadow: 0px 0px 20px 0px var(--bshadow);
   padding: 30px 25px;
-  margin-bottom: 25px;
   background: #fff;
-  transition: .5s;
 }
-
-.custom-form-info-list p:first-child {
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.custom-form-info-list > p:first-child {
+  grid-column: 1;
+  margin: 0;
 }
-
+.custom-form-info-list > h4,
+.custom-form-info-list > p:not(:first-child) {
+  grid-column: 2;
+  margin: 0;
+}
 .custom-form-info-list .icon {
-  background: var(--bgcolor, #9fa83b);
-  border-radius: 50%;
-  padding: 10px;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--bgcolor, #9fa83b);
+  border-radius: 50%;
+}
+.custom-form-info-list img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+
 }
 .custom-form-info-list:hover .icon {
   background: var(--bghovercolor, #7f8730);
-}
-
-.custom-form-info-list img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) invert(1);
 }
 
 /* Form Right Column */
@@ -107,7 +109,7 @@
      grid-template-columns: repeat(2, 1fr);
      gap: 20px;
   }
-  .eds-form:nth-child(5) {
+  .eds-form-field:nth-child(5) {
      grid-column: span 2;
   }
 }
