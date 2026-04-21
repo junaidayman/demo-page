@@ -2,10 +2,51 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 40px;
+  align-items: flex-start;
 }
 
-.custom-form-info > p {
-  margin-bottom: 12px;
+/* ===============================
+   Form Left Column
+   =============================== */
+
+.custom-form-info-list {
+  box-shadow: 0px 0px 20px 0px var(--bshadow);
+  padding: 30px 25px;
+  margin-bottom: 25px;
+  background: #fff;
+}
+
+.custom-form-info-list p:first-child {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-form-info-list .icon {
+  background: var(--bgcolor, #9fa83b);
+  border-radius: 50%;
+  padding: 10px;
+  display: inline-flex;
+}
+
+.custom-form-info-list img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===============================
+   Form Right Column
+   =============================== */
+
+.custom-form-form {
+  position: relative;
+  background-size: cover;
+  text-align: left;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 30px 0px;
+  padding: 60px 35px;
+  border-radius: 10px;
+  background-color: #fff;
 }
 
 .eds-form {
@@ -20,6 +61,16 @@
 
 .eds-form-submit {
   grid-column: span 2;
+  margin-top: 10px;
+}
+
+.eds-form-field input,
+.eds-form-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 .eds-form button {
@@ -30,4 +81,14 @@
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.eds-form button:hover {
+  background: var(--bghovercolor, #7f8730);
+}
+
+@media (max-width: 900px) {
+  .custom-form-layout {
+    grid-template-columns: 1fr;
+  }
 }

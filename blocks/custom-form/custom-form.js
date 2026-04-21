@@ -13,6 +13,27 @@ export default async function decorate(block) {
   infoCol.classList.add('custom-form-info');
   formCol.classList.add('custom-form-form');
 
+  /* ===============================
+     form left column group
+     =============================== */
+
+  const paragraphs = [...infoCol.querySelectorAll('p')];
+  infoCol.innerHTML = '';
+
+  for (let i = 0; i < paragraphs.length; i += 2) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-form-info-list';
+
+    if (paragraphs[i]) wrapper.append(paragraphs[i]);
+    if (paragraphs[i + 1]) wrapper.append(paragraphs[i + 1]);
+
+    infoCol.appendChild(wrapper);
+  }
+
+  /* ===============================
+     form right column group
+     =============================== */
+
   const link = formCol.querySelector('a[href$=".json"]');
   if (!link) return;
 
@@ -54,7 +75,6 @@ export default async function decorate(block) {
     fieldWrap.className = 'eds-form-field';
 
     let input;
-
     if (field.Type === 'textarea') {
       input = document.createElement('textarea');
       input.rows = 5;
