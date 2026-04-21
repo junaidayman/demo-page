@@ -15,6 +15,7 @@
   padding: 30px 25px;
   margin-bottom: 25px;
   background: #fff;
+  transition: .5s;
 }
 
 .custom-form-info-list p:first-child {
@@ -30,10 +31,14 @@
   padding: 10px;
   display: inline-flex;
 }
+.custom-form-info-list:hover .icon {
+  background: var(--bghovercolor, #7f8730);
+}
 
 .custom-form-info-list img {
   width: 16px;
   height: 16px;
+  filter: brightness(0) invert(1);
 }
 
 /* Form Right Column */
@@ -98,15 +103,11 @@
   .custom-form-layout {
      grid-template-columns: 1fr 2fr;
   }
-
   .eds-form {
      grid-template-columns: repeat(2, 1fr);
      gap: 20px;
   }
-
-  /* Make last form field (e.g., textarea or submit) full width */
-  .eds-form textarea,
-  .eds-form-submit {
+  .eds-form:nth-child(5) {
      grid-column: span 2;
   }
 }

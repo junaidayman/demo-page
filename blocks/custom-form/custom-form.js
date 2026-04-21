@@ -14,21 +14,45 @@ export default async function decorate(block) {
   formCol.classList.add('custom-form-form');
 
   /* ===============================
-     form left column group
-     =============================== */
+   Left column grouping logic
+   =============================== */
 
-  const paragraphs = [...infoCol.querySelectorAll('p')];
-  infoCol.innerHTML = '';
+infoCol.classList.add('custom-form-info');
 
-  for (let i = 0; i < paragraphs.length; i += 2) {
+// ✅ If author already grouped content, respect it and stop
+if (infoCol.querySelector('.custom-form-info-list')) {
+  return;
+}
+
+// ✅ Otherwise, auto‑group legacy flat authoring
+const nodes = [...infoCol.children].filter(
+  (el) => el.nodeType === Node.ELEMENT_NODE
+);
+
+infoCol.innerHTML = '';
+
+let buffer = [];
+
+nodes.forEach((el) => {
+  buffer.push(el);
+
+  // icon + heading + value = 3 items
+  if (buffer.length === 3) {
     const wrapper = document.createElement('div');
     wrapper.className = 'custom-form-info-list';
-
-    if (paragraphs[i]) wrapper.append(paragraphs[i]);
-    if (paragraphs[i + 1]) wrapper.append(paragraphs[i + 1]);
-
-    infoCol.appendChild(wrapper);
+    buffer.forEach((n) => wrapper.append(n));
+    infoCol.append(wrapper);
+    buffer = [];
   }
+});
+
+// Safely wrap leftovers
+if (buffer.length) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'custom-form-info-list';
+  buffer.forEach((n) => wrapper.append(n));
+  infoCol.append(wrapper);
+}
 
   /* ===============================
      form right column group
