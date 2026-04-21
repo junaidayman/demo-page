@@ -9,7 +9,7 @@
 .whaet-slide > div {
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-bottom: 100px;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .whaet-slide:hover > div::before {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   opacity: 1;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .whaet-slide:hover > div > div:first-child {
-  transform: scale(1.1);
+  transform: scale(1);
 }
 
 .whaet-slide > div > div:last-child {
@@ -63,7 +63,6 @@
 }
 
 .whaet-slide:hover > div > div:last-child {
-  bottom: 14px;
   background-color: var(--bghovercolor, #f5cf00);
 }
 
